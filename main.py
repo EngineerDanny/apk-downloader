@@ -88,11 +88,16 @@ if app_response.status_code == 200:
         if link.find("/download/") != -1:
             # append the link to the list
             links.append(base_url+link)
-
-    tbody_first_child = links[0]
-
+    
+    # establish a session
+    session = HTMLSession()
+    # connect to needed webpage
+    download_response = session.get(links[0],
+                                     headers=headers, allow_redirects=True)        
+    
     # tbody_href = tbody_first_child.get('class')
-    print(tbody_first_child)
+    download_link = BeautifulSoup(download_response.content, 'html.parser').find(id="download_link")
+    print(download_link)
     # get href of the first child
     # app_href = first_child.get('href')
 
