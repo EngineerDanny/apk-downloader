@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 from colored import fg, bg, attr
 from requests_html import HTMLSession
+import re
+import json
 
 base_url = 'https://apksfull.com'
 version_url = 'https://apksfull.com/version/'
@@ -88,18 +90,27 @@ if app_response.status_code == 200:
         if link.find("/download/") != -1:
             # append the link to the list
             links.append(base_url+link)
-    
+
     # establish a session
     session = HTMLSession()
     # connect to needed webpage
     download_response = session.get(links[0],
-                                     headers=headers, allow_redirects=True)        
-    
+                                    headers=headers, allow_redirects=True)
+
     # tbody_href = tbody_first_child.get('class')
-    download_link = BeautifulSoup(download_response.content, 'html.parser').find(id="download_link")
-    print(download_link)
-    # get href of the first child
-    # app_href = first_child.get('href')
+    download_link = BeautifulSoup(download_response.content, 'html.parser')
+
+    # locate the script, get the contents
+    script_text = download_link.findAll("script")
+
+    # find the last script tag
+    last_script = script_text[-2].contents[0]
+
+    # get javascript object inside the script
+    model_data = re.search(r"token = {.*?};", last_script, flags=re.S)
+    print(last_script)
+# get href of the first child
+# app_href = first_child.get('href')
 
 
 exit()
