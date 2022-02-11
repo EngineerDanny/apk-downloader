@@ -50,23 +50,26 @@ This package helps you to directly download an APK from Google Play by providing
 
 ## :sparkles: Features
 
-:heavy_check_mark: Feature 1;\Verifies the package ID of an app
-:heavy_check_mark: Feature 2;\Downloads the latest apk version on Google Play
+:heavy_check_mark: Feature 1.
+Verifies the package ID of an app
+;
+
+:heavy_check_mark: Feature 2.
+Downloads the latest apk version on Google Play
 
 
 ## :rocket: Technologies
 
-The following tools were used in this Python Project:
+The following packages were used in this Python Project:
 
 - [requests](https://expo.io/)
 - [BeautifulSoup](https://nodejs.org/en/)
 - [colored](https://pt-br.reactjs.org/)
 - [Regular Expressions (re)](https://reactnative.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
 
 ## :white_check_mark: Requirements
 
-Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
+Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Python🐍](https://nodejs.org/en/) installed.
 
 ## :checkered_flag: Starting
 
@@ -83,7 +86,6 @@ $ yarn
 # Run the project
 $ yarn start
 
-# The server will initialize in the <http://localhost:3000>
 ```
 
 ## :memo: License
