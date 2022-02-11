@@ -56,19 +56,18 @@ Verifies the package ID of an app
 :heavy_check_mark: Feature 2.
 Downloads the latest apk version on Google Play
 
-
 ## :rainbow: Technologies
 
 The following packages were used in this Python Project:
 
-- [requests](https://expo.io/)
-- [BeautifulSoup](https://nodejs.org/en/)
-- [colored](https://pt-br.reactjs.org/)
-- [Regular Expressions (re)](https://reactnative.dev/)
+- [requests](https://pypi.org/project/requests/)
+- [BeautifulSoup](https://pypi.org/project/beautifulsoup4/)
+- [colored](https://pypi.org/project/colored/)
+- [Regular Expressions (re)](https://docs.python.org/3/library/re.html)
 
 ## :white_check_mark: Requirements
 
-Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Python🐍](https://nodejs.org/en/) installed.
+Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Python🐍]https://www.python.org) installed.
 
 ## :checkered_flag: Starting
 
@@ -84,12 +83,13 @@ $ `pip install -r requirements.txt` or  `pip3 install -r requirements.txt`
 ```
 
 ## :rocket: Running
+
 ```bash
 # Command
- `python main.py {{bundle identifier}}`
+ $`python main.py {{bundle identifier}}` or `python3 main.py {{bundle identifier}}`
 
 # Example
- `python main.py com.imdb.mobile`
+ $`python main.py com.imdb.mobile` or `python3 main.py com.imdb.mobile`
 ```
 
 ## :memo: License
@@ -101,5 +101,3 @@ Made with :heart: by <a href="https://github.com/EngineerDanny" target="_blank">
 &#xa0;
 
 <a href="#top">Back to top</a>
-
-
