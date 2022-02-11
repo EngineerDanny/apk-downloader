@@ -56,12 +56,12 @@ This package helps you to directly download an APK from Google Play by providing
 
 ## :rocket: Technologies
 
-The following tools were used in this project:
+The following tools were used in this Python Project:
 
-- [Expo](https://expo.io/)
-- [Node.js](https://nodejs.org/en/)
-- [React](https://pt-br.reactjs.org/)
-- [React Native](https://reactnative.dev/)
+- [requests](https://expo.io/)
+- [BeautifulSoup](https://nodejs.org/en/)
+- [colored](https://pt-br.reactjs.org/)
+- [Regular Expressions (re)](https://reactnative.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 
 ## :white_check_mark: Requirements
