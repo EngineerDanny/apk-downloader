@@ -52,7 +52,6 @@ This package helps you to directly download an APK from Google Play by providing
 
 :heavy_check_mark: Feature 1.
 Verifies the package ID of an app
-;
 
 :heavy_check_mark: Feature 2.
 Downloads the latest apk version on Google Play

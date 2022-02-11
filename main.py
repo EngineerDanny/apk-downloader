@@ -1,3 +1,10 @@
+"""
+APK DOWNLOADER
+Author  :   Daniel Agyapong
+Website :   https://engineerdanny.me
+Date    :   February, 2022
+"""
+
 import requests
 from bs4 import BeautifulSoup
 from colored import fg, bg, attr
@@ -24,13 +31,13 @@ package_id = input(
     "Enter the packageId of the android app\nShould something like com.example.app\n")
 
 # verify g_play_url with packageId string
-g_play_res= requests.get(g_play_url + package_id,
-                        headers=headers, allow_redirects=True)
+g_play_res = requests.get(g_play_url + package_id,
+                          headers=headers, allow_redirects=True)
 if(g_play_res.status_code != 200):
     print('%s%s PackageId is invalid %s' %
           (fg('white'), bg('red'), attr('reset')))
     exit()
-    
+
 response = requests.get(search_url + package_id,
                         headers=headers, allow_redirects=True)
 statusCode = response.status_code
@@ -91,7 +98,7 @@ for item in tbody_children:
 
 # establish a connection to the first link
 download_response = requests.get(links[0],
-                                headers=headers, allow_redirects=True)
+                                 headers=headers, allow_redirects=True)
 
 # locate the script, get the contents
 script_text = BeautifulSoup(
