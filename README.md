@@ -67,7 +67,7 @@ The following packages were used in this Python Project:
 
 ## :white_check_mark: Requirements
 
-Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Python🐍]https://www.python.org) installed.
+Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Python🐍](https://www.python.org) installed.
 
 ## :checkered_flag: Starting
 
