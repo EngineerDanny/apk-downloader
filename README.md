@@ -80,10 +80,11 @@ $ git clone https://github.com/EngineerDanny/apk-downloader
 $ cd apk-downloader
 
 # Install dependencies
-$ yarn
+$ `pip install -r requirements.txt` or  `pip3 install -r requirements.txt`
 
 # Run the project
-$ yarn start
+$ `python main.py` or `python3 main.py`
+
 
 ```
 
