@@ -8,15 +8,14 @@ import json
 base_url = 'https://apksfull.com'
 version_url = 'https://apksfull.com/version/'
 search_url = 'https://apksfull.com/search/'
+dl_url = 'https://apksfull.com/dl/'
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1',
     'Accept': 'application/json, text/javascript, */*; q=0.01',
     'Accept-Language': 'en-US,en;q=0.5',
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    'Referer': 'https://apksfull.com/',
     'Connection': 'keep-alive',
-
 }
 
 print('%s%s Hello, Welcome to APK Downloader 🙌 !!! %s' %
@@ -73,63 +72,55 @@ app_id = app_href.rsplit('/', 1)[1]
 app_response = requests.get(version_url + app_id,
                             headers=headers, allow_redirects=True)
 
-if app_response.status_code == 200:
+if app_response.status_code != 200:
+    exit()
 
-    app_soup = BeautifulSoup(app_response.content, 'html.parser')
+app_soup = BeautifulSoup(app_response.content, 'html.parser')
 
-    tbody_children = app_soup.findAll('a')
+tbody_children = app_soup.findAll('a')
 
-    links = []
+links = []
 
-    # tbody_children
-    # loop through the children and get the href
-    for item in tbody_children:
-        # get href of the child
-        link = item.get('href')
-        # if link contains "downwload"
-        if link.find("/download/") != -1:
-            # append the link to the list
-            links.append(base_url+link)
+# tbody_children
+# loop through the children and get the href
+for item in tbody_children:
+    # get href of the child
+    link = item.get('href')
+    # if link contains "downwload"
+    if link.find("/download/") != -1:
+        # append the link to the list
+        links.append(base_url+link)
 
-    # establish a session
-    session = HTMLSession()
-    # connect to needed webpage
-    download_response = session.get(links[0],
-                                    headers=headers, allow_redirects=True)
+# establish a session
+session = HTMLSession()
+# connect to needed webpage
+download_response = session.get(links[0],
+                                headers=headers, allow_redirects=True)
 
-    # tbody_href = tbody_first_child.get('class')
-    download_link = BeautifulSoup(download_response.content, 'html.parser')
+# locate the script, get the contents
+script_text = BeautifulSoup(
+    download_response.content, 'html.parser').findAll("script")
 
-    # locate the script, get the contents
-    script_text = download_link.findAll("script")
+# find the last script tag
+last_script = script_text[-2].contents[0]
 
-    token = "Z1NjU091TVdGdkVZZWNXeStDaGgvL1RXbVBKeUo1OVk2Ti9ySCtyY2JvVjA1SlF0Nzd5VlpHcGc4aGhrU05KKzBYc0VkUzZsZE5XSGNoaU5JUlpQYnVCRU5NY29qUGxKbDkvbkZJZHFDQ2pqdndtVDJVaFdqUGtocXBuQmtabWsxd1JhaVYxZlZiM0o0UEFVZVdGbkc2QURJMVdkWXEzbXdFeG9ObTJqM01zdWt2RnRlNUVIb1B6Uk9KNll6eHkzSU55UGc5eWRiZktHSFppVng0MFJpZz09"
+# query the token from the script
+token = re.findall("token','([^\']+)", last_script)[0]
 
-    length = len(token)
+# make a request to the download link
+dl_response = requests.post(dl_url, data={'token': token}, headers=headers)
+if dl_response.status_code != 200:
+    exit()
+dl_response_json = dl_response.json()
+# get the download_link from the json response
+download_link = dl_response_json['download_link']
 
-    # find the last script tag
-    last_script = script_text[-2].contents[0]
+# download the apk
+print("Downloading APK")
+r = requests.get(download_link, allow_redirects=True)
+with open(app_name_formatted+'.apk', 'wb') as f:
+    f.write(r.content)
+print("APK Downloaded")
 
-    tokens = []
 
-    # check if the token is present for all the words in splitted
-    for word in last_script.split():
-        if(len(word) >= 288):
-            tokens.append(word)
-
-    # get javascript object inside the script
-    # result = re.search(r'^[0-9a-fA-F]{32}$', s)
-    model_data = re.findall("token','([^\']+)", last_script)[0]
-    
-    print(model_data) 
-# get href of the first child
-# app_href = first_child.get('href')
-
-# "(?m)^(?=\s*([a-z]{4,}\s*)*$).*"g
 exit()
-
-# retrieve the first app from the list
-# get the download link
-# download the app
-
-# print("This is the content of the request " + str(content.decode()) + "\n")
