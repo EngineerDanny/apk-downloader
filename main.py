@@ -1,14 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
 from colored import fg, bg, attr
-from requests_html import HTMLSession
 import re
-import json
 
 base_url = 'https://apksfull.com'
 version_url = 'https://apksfull.com/version/'
 search_url = 'https://apksfull.com/search/'
 dl_url = 'https://apksfull.com/dl/'
+g_play_url = 'https://play.google.com/store/apps/details?id='
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1',
@@ -21,19 +20,18 @@ headers = {
 print('%s%s Hello, Welcome to APK Downloader 🙌 !!! %s' %
       (fg('white'), bg('green'), attr('reset')))
 # take the package_id from the user
-# package_id = input(
-#     "Enter the packageId of the android app\nShould something like com.example.app\n")
+package_id = input(
+    "Enter the packageId of the android app\nShould something like com.example.app\n")
 
-# verify packageId string
-
-# establish a session
-# session = HTMLSession()
-
-# connect to needed webpage
-# resp = session.get(search_url+"farmhouse")
-
-
-response = requests.get(search_url + "com.farmhouse.app",
+# verify g_play_url with packageId string
+g_play_res= requests.get(g_play_url + package_id,
+                        headers=headers, allow_redirects=True)
+if(g_play_res.status_code != 200):
+    print('%s%s PackageId is invalid %s' %
+          (fg('white'), bg('red'), attr('reset')))
+    exit()
+    
+response = requests.get(search_url + package_id,
                         headers=headers, allow_redirects=True)
 statusCode = response.status_code
 content = response.content
@@ -91,10 +89,8 @@ for item in tbody_children:
         # append the link to the list
         links.append(base_url+link)
 
-# establish a session
-session = HTMLSession()
-# connect to needed webpage
-download_response = session.get(links[0],
+# establish a connection to the first link
+download_response = requests.get(links[0],
                                 headers=headers, allow_redirects=True)
 
 # locate the script, get the contents
@@ -117,6 +113,7 @@ download_link = dl_response_json['download_link']
 
 # download the apk
 print("Downloading APK")
+exit()
 r = requests.get(download_link, allow_redirects=True)
 with open(app_name_formatted+'.apk', 'wb') as f:
     f.write(r.content)
