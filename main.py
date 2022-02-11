@@ -103,16 +103,29 @@ if app_response.status_code == 200:
     # locate the script, get the contents
     script_text = download_link.findAll("script")
 
+    token = "Z1NjU091TVdGdkVZZWNXeStDaGgvL1RXbVBKeUo1OVk2Ti9ySCtyY2JvVjA1SlF0Nzd5VlpHcGc4aGhrU05KKzBYc0VkUzZsZE5XSGNoaU5JUlpQYnVCRU5NY29qUGxKbDkvbkZJZHFDQ2pqdndtVDJVaFdqUGtocXBuQmtabWsxd1JhaVYxZlZiM0o0UEFVZVdGbkc2QURJMVdkWXEzbXdFeG9ObTJqM01zdWt2RnRlNUVIb1B6Uk9KNll6eHkzSU55UGc5eWRiZktHSFppVng0MFJpZz09"
+
+    length = len(token)
+
     # find the last script tag
     last_script = script_text[-2].contents[0]
 
+    tokens = []
+
+    # check if the token is present for all the words in splitted
+    for word in last_script.split():
+        if(len(word) >= 288):
+            tokens.append(word)
+
     # get javascript object inside the script
-    model_data = re.search(r"token = {.*?};", last_script, flags=re.S)
-    print(last_script)
+    # result = re.search(r'^[0-9a-fA-F]{32}$', s)
+    model_data = re.findall("token','([^\']+)", last_script)[0]
+    
+    print(model_data) 
 # get href of the first child
 # app_href = first_child.get('href')
 
-
+# "(?m)^(?=\s*([a-z]{4,}\s*)*$).*"g
 exit()
 
 # retrieve the first app from the list
