@@ -46,14 +46,13 @@
 
 ## :dart: About
 
-About
-A package that helps users to directly download an APK from Google Play by providing the package id of the app.
+This package helps you to directly download an APK from Google Play by providing the package id of the app.
 
 ## :sparkles: Features
 
-:heavy_check_mark: Feature 1;\
-:heavy_check_mark: Feature 2;\
-:heavy_check_mark: Feature 3;
+:heavy_check_mark: Feature 1;\Verifies the package ID of an app
+:heavy_check_mark: Feature 2;\Downloads the latest apk version on Google Play
+
 
 ## :rocket: Technologies
 
