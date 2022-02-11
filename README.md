@@ -1,7 +1,7 @@
 <div align="center" id="top"> 
   <img src="./.github/app.gif" alt="Apk Downloader" />
 
-  &#xa0;
+&#xa0;
 
   <!-- <a href="https://apkdownloader.netlify.app">Demo</a> -->
 </div>
@@ -17,18 +17,18 @@
 
   <img alt="License" src="https://img.shields.io/github/license/EngineerDanny/apk-downloader?color=56BEB8">
 
-  <!-- <img alt="Github issues" src="https://img.shields.io/github/issues/EngineerDanny/apk-downloader?color=56BEB8" /> -->
+  <img alt="Github issues" src="https://img.shields.io/github/issues/EngineerDanny/apk-downloader?color=56BEB8" />
 
-  <!-- <img alt="Github forks" src="https://img.shields.io/github/forks/EngineerDanny/apk-downloader?color=56BEB8" /> -->
+  <img alt="Github forks" src="https://img.shields.io/github/forks/EngineerDanny/apk-downloader?color=56BEB8" />
 
-  <!-- <img alt="Github stars" src="https://img.shields.io/github/stars/EngineerDanny/apk-downloader?color=56BEB8" /> -->
+  <img alt="Github stars" src="https://img.shields.io/github/stars/EngineerDanny/apk-downloader?color=56BEB8" />
 </p>
 
 <!-- Status -->
 
-<!-- <h4 align="center"> 
+<!-- <h4 align="center">
 	🚧  Apk Downloader 🚀 Under construction...  🚧
-</h4> 
+</h4>
 
 <hr> -->
 
@@ -44,17 +44,17 @@
 
 <br>
 
-## :dart: About ##
+## :dart: About
 
 Describe your project
 
-## :sparkles: Features ##
+## :sparkles: Features
 
 :heavy_check_mark: Feature 1;\
 :heavy_check_mark: Feature 2;\
 :heavy_check_mark: Feature 3;
 
-## :rocket: Technologies ##
+## :rocket: Technologies
 
 The following tools were used in this project:
 
@@ -64,11 +64,11 @@ The following tools were used in this project:
 - [React Native](https://reactnative.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 
-## :white_check_mark: Requirements ##
+## :white_check_mark: Requirements
 
 Before starting :checkered_flag:, you need to have [Git](https://git-scm.com) and [Node](https://nodejs.org/en/) installed.
 
-## :checkered_flag: Starting ##
+## :checkered_flag: Starting
 
 ```bash
 # Clone this project
@@ -86,12 +86,11 @@ $ yarn start
 # The server will initialize in the <http://localhost:3000>
 ```
 
-## :memo: License ##
+## :memo: License
 
 This project is under license from MIT. For more details, see the [LICENSE](LICENSE.md) file.
 
-
-Made with :heart: by <a href="https://github.com/EngineerDanny" target="_blank">{{YOUR_NAME}}</a>
+Made with :heart: by <a href="https://github.com/EngineerDanny" target="_blank">EngineerDanny</a>
 
 &#xa0;
 
