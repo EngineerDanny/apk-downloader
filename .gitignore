@@ -1,2 +1,4 @@
 *.apk
 *.idea
+*.vscode
+.vscode/launch.json

@@ -57,7 +57,7 @@ Verifies the package ID of an app
 Downloads the latest apk version on Google Play
 
 
-## :rocket: Technologies
+## :rainbow: Technologies
 
 The following packages were used in this Python Project:
 
