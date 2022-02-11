@@ -81,11 +81,15 @@ $ cd apk-downloader
 
 # Install dependencies
 $ `pip install -r requirements.txt` or  `pip3 install -r requirements.txt`
+```
 
-# Run the project
-$ `python main.py` or `python3 main.py`
+## :rocket: Running
+```bash
+# Command
+ `python main.py {{bundle identifier}}`
 
-
+# Example
+ `python main.py com.imdb.mobile`
 ```
 
 ## :memo: License
@@ -97,3 +101,5 @@ Made with :heart: by <a href="https://github.com/EngineerDanny" target="_blank">
 &#xa0;
 
 <a href="#top">Back to top</a>
+
+
