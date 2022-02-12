@@ -5,7 +5,6 @@ Website :   https://engineerdanny.me
 Date    :   February, 2022
 """
 
-from multiprocessing.connection import wait
 import sys
 import requests
 from bs4 import BeautifulSoup
