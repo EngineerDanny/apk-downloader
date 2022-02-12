@@ -5,11 +5,17 @@ Website :   https://engineerdanny.me
 Date    :   February, 2022
 """
 
+from multiprocessing.connection import wait
 import sys
+from time import sleep
+from turtle import delay
 import requests
 from bs4 import BeautifulSoup
 from colored import fg, bg, attr
 import re
+import progressbar
+import itertools
+
 
 base_url = 'https://apksfull.com'
 version_url = 'https://apksfull.com/version/'
@@ -39,9 +45,32 @@ def show_arg_error():
 
 
 def show_invalid_id_err():
-    print('%s%s PackageId is invalid %s' %
-          (fg('white'), bg('red'), attr('reset')))
+    print('%s PackageId is invalid %s' %
+          (fg('red'), attr('reset')))
     exit()
+
+
+def make_spinner():
+    spinner = itertools.cycle(['-', '/', '|', '\\'])
+    while True:
+        sys.stdout.write(next(spinner))   # write the next character
+        sys.stdout.flush()                # flush stdout buffer (actual 
+        sys.stdout.write('\b')            # erase the last written char
+
+
+def make_progress_bar():
+    return progressbar.ProgressBar(
+        redirect_stdout=True,
+        redirect_stderr=True,
+        widgets=[
+            progressbar.Percentage(),
+            progressbar.Bar(),
+            ' (',
+            progressbar.AdaptiveTransferSpeed(),
+            ' ',
+            progressbar.ETA(),
+            ') ',
+        ])
 
 
 def main():
@@ -49,8 +78,8 @@ def main():
     if len(sys.argv) != 2:
         show_arg_error()
 
-    print('%s%s Hello, Welcome to APK Downloader 🙌 !!! %s' %
-          (fg('white'), bg('green'), attr('reset')))
+    print('%sHello, Welcome to APK Downloader 🙌 !!! %s' %
+          (fg('cornflower_blue'), attr('reset')))
 
     # take the package_id from the user
     package_id = sys.argv[1]
@@ -134,12 +163,28 @@ def main():
     download_link = dl_res_json['download_link']
 
     # download the apk
-    print("Downloading APK")
-    exit()
-    r = requests.get(download_link, allow_redirects=True)
-    with open(app_name_formatted+'.apk', 'wb') as f:
-        f.write(r.content)
-    print("APK Downloaded")
+    print('%sDownloading APK 🚀🚀🚀 %s' %
+          (fg('cornflower_blue'), attr('reset')))
+
+    # TODO: replace app_name with actual app name
+    output_file = "output/" + "app_name" + ".apk"
+
+    r = requests.get(download_link, allow_redirects=True, stream=True)
+    with open(output_file, 'wb') as f:
+        total_length = int(r.headers.get('content-length'))
+        bar = make_progress_bar()
+        bar.start(total_length)
+        dl = 0
+        for chunk in r.iter_content(chunk_size=1024):
+            if chunk:
+                dl += len(chunk)
+                f.write(chunk)
+                bar.update(dl)
+        bar.finish()
+    print('%sAPK Downloaded %s' %
+          (fg('green'), attr('reset')))
+
+    print("File saved to " + output_file)
 
     exit()
 
