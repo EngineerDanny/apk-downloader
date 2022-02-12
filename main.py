@@ -7,8 +7,6 @@ Date    :   February, 2022
 
 from multiprocessing.connection import wait
 import sys
-from time import sleep
-from turtle import delay
 import requests
 from bs4 import BeautifulSoup
 from colored import fg, bg, attr
@@ -54,7 +52,7 @@ def make_spinner():
     spinner = itertools.cycle(['-', '/', '|', '\\'])
     while True:
         sys.stdout.write(next(spinner))   # write the next character
-        sys.stdout.flush()                # flush stdout buffer (actual 
+        sys.stdout.flush()                # flush stdout buffer (actual
         sys.stdout.write('\b')            # erase the last written char
 
 
@@ -83,6 +81,9 @@ def main():
 
     # take the package_id from the user
     package_id = sys.argv[1]
+
+    print('%sGetting download link... %s' %
+          (fg('light_yellow'), attr('reset')))
 
     # verify g_play_url with packageId string
     g_play_res = requests.get(g_play_url + package_id,
@@ -164,7 +165,7 @@ def main():
 
     # download the apk
     print('%sDownloading APK 🚀🚀🚀 %s' %
-          (fg('cornflower_blue'), attr('reset')))
+          (fg('yellow'), attr('reset')))
 
     # TODO: replace app_name with actual app name
     output_file = "output/" + "app_name" + ".apk"
@@ -184,7 +185,8 @@ def main():
     print('%sAPK Downloaded %s' %
           (fg('green'), attr('reset')))
 
-    print("File saved to " + output_file)
+    print('%sAPK DOWNLOADED : App saved to output/app.apk %s' %
+          (fg('green'), attr('reset')))
 
     exit()
 
