@@ -12,13 +12,14 @@ from colored import fg, bg, attr
 import re
 import progressbar
 import itertools
-
+import os
 
 base_url = 'https://apksfull.com'
 version_url = 'https://apksfull.com/version/'
 search_url = 'https://apksfull.com/search/'
 dl_url = 'https://apksfull.com/dl/'
 g_play_url = 'https://play.google.com/store/apps/details?id='
+output_path = './output'
 
 headers = {
     'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1',
@@ -63,7 +64,7 @@ def make_progress_bar():
             progressbar.Percentage(),
             progressbar.Bar(),
             ' (',
-            progressbar.AdaptiveTransferSpeed(),
+            progressbar.FileTransferSpeed(),
             ' ',
             progressbar.ETA(),
             ') ',
@@ -167,7 +168,9 @@ def main():
           (fg('yellow'), attr('reset')))
 
     # TODO: replace app_name with actual app name
-    output_file = "output/" + "app_name" + ".apk"
+    if not os.path.isdir(output_path):
+        os.mkdir(output_path)
+    output_file = '{}/{}.apk'.format(output_path, sys.argv[1])
 
     r = requests.get(download_link, allow_redirects=True, stream=True)
     with open(output_file, 'wb') as f:
@@ -184,7 +187,7 @@ def main():
     print('%sAPK Downloaded %s' %
           (fg('green'), attr('reset')))
 
-    print('%sAPK DOWNLOADED : App saved to output/app.apk %s' %
+    print('%sAPK DOWNLOADED : App saved to {} %s'.format(output_file) %
           (fg('green'), attr('reset')))
 
     exit()
