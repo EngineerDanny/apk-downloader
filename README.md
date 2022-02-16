@@ -86,7 +86,7 @@ $ `pip install -r requirements.txt` or  `pip3 install -r requirements.txt`
 
 ```bash
 # Command
- $`python main.py {{bundle identifier}}` or `python3 main.py {{bundle identifier}}`
+ $`python main.py {bundle identifier}` or `python3 main.py {bundle identifier}`
 
 # Example
  $`python main.py com.imdb.mobile` or `python3 main.py com.imdb.mobile`
