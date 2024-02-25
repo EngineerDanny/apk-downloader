@@ -12,6 +12,7 @@ from colored import fg, bg, attr
 import re
 import progressbar
 import itertools
+import os
 
 
 base_url = 'https://apksfull.com'
@@ -75,7 +76,7 @@ def main():
     if len(sys.argv) != 2:
         show_arg_error()
 
-    print('%sHello, Welcome to APK Downloader 🙌 !!! %s' %
+    print('%sHello, Welcome to APK Downloader !!! %s' %
           (fg('cornflower_blue'), attr('reset')))
 
     # take the package_id from the user
@@ -126,6 +127,15 @@ def main():
 
     tbody_children = soup.findAll('a')
 
+    # get app name
+    app_name = 'app_name'
+    app_name_element = soup.find('h1', {'itemprop': 'name'})
+    if app_name_element:
+        app_name = app_name_element.text.replace(" ", "") # strip() doesn't work here
+        print("Found app name, APK would be named: " + app_name)
+    else:
+        print("App name element not found. Defaulting to app_name.apk")
+
     sub_dl_links = []
 
     # tbody_children
@@ -163,11 +173,12 @@ def main():
     download_link = dl_res_json['download_link']
 
     # download the apk
-    print('%sDownloading APK 🚀🚀🚀 %s' %
-          (fg('yellow'), attr('reset')))
+    print('Started downloading APK')
+    output_file = "output/" + app_name + ".apk"
 
-    # TODO: replace app_name with actual app name
-    output_file = "output/" + "app_name" + ".apk"
+    if not os.path.exists('output'):
+        print('Directory output/ is missing, creating it now.')
+        os.mkdir('output')
 
     r = requests.get(download_link, allow_redirects=True, stream=True)
     with open(output_file, 'wb') as f:
@@ -181,13 +192,8 @@ def main():
                 f.write(chunk)
                 bar.update(dl)
         bar.finish()
-    print('%sAPK Downloaded %s' %
-          (fg('green'), attr('reset')))
 
-    print('%sAPK DOWNLOADED : App saved to output/app.apk %s' %
-          (fg('green'), attr('reset')))
-
+    print('APK Downloaded: App saved to ' + output_file)
     exit()
-
 
 main()
